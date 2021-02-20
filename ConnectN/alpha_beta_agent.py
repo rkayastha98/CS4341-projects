@@ -51,3 +51,27 @@ class AlphaBetaAgent(agent.Agent):
             # Add board to list of successors
             succ.append((nb,col))
         return succ
+
+
+# THE_AGENT = AlphaBetaAgent("Group19", 4)
+
+# function ALPHA-BETA-SEARCH(state) returns an action
+#     v<- MAX-VALUE(state,-infinity, +infinity)
+#     return the action in ACTIONS(state) with value v
+
+# function MAX-VALUE(state,alpha, beta) returns a utility value   
+#     if TERMINAL-TEST(state) then return UTILITY(state)
+#     v<--infinity
+#     for each alpha in ACTIONS(state) do 
+#         v<-MAX(v, MIN-VALUE(RESULT(S, alpha), alpha, beta))
+#         if v >= beta then return valuealpha<-MAX(alpha, v)
+#     return v 
+
+# function MIN-VALUE(state, alpha, beta) returns a utility value
+#     if TERMINAL-TEST(state) then return UTILITY(state)
+#     v<- +infinity
+#     for each alpha in ACTIONS(state) do
+#         v<-MIN(v, MAX-VALUE(RESULT(s, alpha), alpha, beta))
+#         if v<=alpha then return v
+#         beta<-MIN(beta, v)
+#     return v
