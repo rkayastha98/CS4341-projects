@@ -27,6 +27,74 @@ class AlphaBetaAgent(agent.Agent):
         """Search for the best move (choice of column for the token)"""
         # Your code here
 
+
+        #minimax with alpha-beta pruning
+        v=self.maxValue(brd,-100000,100000)
+        # return the action in ACTIONS(state) with value v
+        return actions(brd)
+
+
+    def maxValue(state, alpha, beta):
+        if terminalTest(state):
+            return utility(state)
+        value=-100000 #in place of -infinity
+        for a in actions(state):
+            value=max(value, minValue(result(S, a), alpha, beta))
+            if value>=beta:
+                return value
+            alpha=max(alpha,value)
+        return value
+
+    def minValue(state, alpha, beta):
+        if terminalTest(state):
+            return utility(state)
+        value = 100000 #in place of +infinity
+        for a in actions(state):
+            value = min(value, maxValue(result(S, a), alpha, beta))
+            if value <= alpha:
+                return value
+            beta = min(alpha, value)
+        return value
+    
+    #the next three functions are for checking the terminal state for both players
+    def isLineAt(self, x, y, dx, dy):
+        """ Return  True if a line of  identical  tokens  exists  starting  at (x,y)in  direction (dx ,dy)"""
+        # Your  code  here
+        num = self.board[x][y]
+        count = 1
+        for i in range(3):
+            x = x+dx
+            y = y+dy
+            #Return 0 if out of bounds
+            if(((x < 0) or (x >= self.w)) or ((y < 0) or (y >= self.h))):
+                return 0
+            #Keep count if the same non-zero number appears consecutively
+            if(self.board[x][y] == num):
+                count += 1
+        #Check if the count is 4
+        if ((count == 4) and (num != 0)):
+            return num
+        else:
+            return 0
+    
+    def isAnyLineAt(self, x, y):
+        """ Return  True if a line of  identical  symbols  exists  starting  at (x,y)in any  direction """
+        return (self.isLineAt(x, y, 1, 0) or  # Horizontal
+                self.isLineAt(x, y, 0, 1) or  # Vertical
+                self.isLineAt(x, y, 1, 1) or  # Diagonal  up
+                self.isLineAt(x, y, 1,  -1))  # Diagonal  down
+
+    def terminalTest(self):
+        """ Returns  the  winner  of the  game: 1 for  Player 1, 2 for  Player 2, and0 for no  winner """
+        # check numbers throughout the board
+        w=len(self.brd)
+        h=len(self.brd[0])
+        for x in range(self.w-2):
+            for y in range(self.h-2):
+                return self.isAnyLineAt(x, y)
+
+        return false
+
     # Get the successors of the given board.
     #
     # PARAM [board.Board] brd: the board state
@@ -55,23 +123,3 @@ class AlphaBetaAgent(agent.Agent):
 
 # THE_AGENT = AlphaBetaAgent("Group19", 4)
 
-# function ALPHA-BETA-SEARCH(state) returns an action
-#     v<- MAX-VALUE(state,-infinity, +infinity)
-#     return the action in ACTIONS(state) with value v
-
-# function MAX-VALUE(state,alpha, beta) returns a utility value   
-#     if TERMINAL-TEST(state) then return UTILITY(state)
-#     v<--infinity
-#     for each alpha in ACTIONS(state) do 
-#         v<-MAX(v, MIN-VALUE(RESULT(S, alpha), alpha, beta))
-#         if v >= beta then return valuealpha<-MAX(alpha, v)
-#     return v 
-
-# function MIN-VALUE(state, alpha, beta) returns a utility value
-#     if TERMINAL-TEST(state) then return UTILITY(state)
-#     v<- +infinity
-#     for each alpha in ACTIONS(state) do
-#         v<-MIN(v, MAX-VALUE(RESULT(s, alpha), alpha, beta))
-#         if v<=alpha then return v
-#         beta<-MIN(beta, v)
-#     return v
