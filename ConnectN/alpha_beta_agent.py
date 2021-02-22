@@ -141,7 +141,7 @@ class AlphaBetaAgent(agent.Agent):
             line_weight_agt += lines_agt.count(x) * weight
             line_weight_opp += lines_opp.count(x) * weight
 
-        result += line_weight_agt - line_weight_opp # if maximize else line_weight_opp - line_weight_agt
+        result += line_weight_agt - line_weight_opp if maximize else line_weight_opp - line_weight_agt
 
         # favor plays towards the center of the board - low weight
         #if maximize:
@@ -156,9 +156,9 @@ class AlphaBetaAgent(agent.Agent):
             return result
 
         if (end_check == self.player):  # or (not maximize and end_check == (self.player + 1) % 2):
-            result += 1000
+            result += 100000
         else:
-            result += -1000
+            result += -100000
 
         return result
 

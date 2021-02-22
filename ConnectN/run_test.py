@@ -27,12 +27,12 @@ random.seed(1)
 #
 #Random vs. AlphaBeta
 wins = [0, 0]
-n = 100
+n = 10
 for i in range(n):
     random.seed(i)
     g = game.Game(10, # width
               8, # height
-              4, # tokens in a row to win
+              5, # tokens in a row to win
               aba.AlphaBetaAgent("alphabeta", 5),      # player 1
               agent.RandomAgent("human")) # player 2
     outcome = g.go()
