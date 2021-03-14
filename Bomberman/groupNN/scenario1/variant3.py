@@ -22,10 +22,11 @@ g.add_monster(SelfPreservingMonster("selfpreserving", # name
 ))
 
 # TODO Add your character
-g.add_character(TestCharacter("me", # name
+from expectimaxcharacter import ExpectimaxCharacter
+g.add_character(ExpectimaxCharacter("me", # name
                               "C",  # avatar
                               0, 0  # position
 ))
 
 # Run!
-g.go()
+g.go(100)

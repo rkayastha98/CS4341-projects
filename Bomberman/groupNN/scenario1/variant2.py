@@ -21,7 +21,8 @@ g.add_monster(StupidMonster("stupid", # name
 ))
 
 # TODO Add your character
-g.add_character(Variant2Character("me", # name
+from expectimaxcharacter import ExpectimaxCharacter
+g.add_character(ExpectimaxCharacter("me", # name
                               "C",  # avatar
                               0, 0  # position
 ))
