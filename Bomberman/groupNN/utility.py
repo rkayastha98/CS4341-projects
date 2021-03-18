@@ -23,7 +23,7 @@ def get_neighbors(wrld, node):
     return neighbors
 
 # returns a list of only wall neighbors
-def get_walls(wrld, node):
+def get_wall_neighbors(wrld, node):
     x0, y0 = node
     neighbors = []
     for dx in [-1, 0, 1]:
@@ -34,7 +34,13 @@ def get_walls(wrld, node):
                         if wrld.wall_at(x0 + dx, y0 + dy):
                             neighbors.append((x0 + dx, y0 + dy))
     return neighbors
-
+def get_wall_count(wrld):
+    count = 0
+    for i in range(wrld.width()):
+        for j in range(wrld.height()):
+            if wrld.wall_at(i, j):
+                count+=1
+    return count
 
 
 def a_star(start, wrld, dest):
@@ -91,3 +97,6 @@ def distance(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
     return math.sqrt((x2 - x1)**2+(y2 - y1)**2)
+
+def get_blast_zone(bomb_loc, radius):
+    return [[(bomb_loc[0] + delta * axis, bomb_loc[1] + delta * (1-axis)) for axis in [0, 1]] for delta in range(-radius, 0) + range(1, radius+1)]
