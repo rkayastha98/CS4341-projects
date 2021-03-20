@@ -9,11 +9,11 @@ from game import Game
 from monsters.selfpreserving_monster import SelfPreservingMonster
 
 # TODO This is your code!
-sys.path.insert(1, '../groupNN')
+sys.path.insert(1, '../group19')
 from testcharacter import TestCharacter
 
 # Create the game
-random.seed(123) # TODO Change this if you want different random choices
+random.seed(12345) # TODO Change this if you want different random choices
 g = Game.fromfile('map.txt')
 g.add_monster(SelfPreservingMonster("selfpreserving", # name
                                     "S",              # avatar
@@ -23,10 +23,7 @@ g.add_monster(SelfPreservingMonster("selfpreserving", # name
 
 # TODO Add your character
 from expectimaxcharacter import ExpectimaxCharacter
-g.add_character(ExpectimaxCharacter("me", # name
-                              "C",  # avatar
-                              0, 0  # position
-))
+g.add_character(ExpectimaxCharacter("me", "C", 0, 0, 25, 0, 2000, 1))
 
 # Run!
 g.go(1)

@@ -58,7 +58,7 @@ def a_star(start, wrld, dest):
 
     # f_score = g_score(n) + h(n)
     f_score = dict()
-    f_score[start] = grid_h(start, dest)
+    f_score[start] = manhattan_distance(start, dest)
 
     while frontier:
         current = heapq.heappop(frontier)[1]
@@ -71,13 +71,13 @@ def a_star(start, wrld, dest):
             if tentative_g_score < g_score.setdefault(neighbor, math.inf):
                 came_from[neighbor] = current
                 g_score[neighbor] = tentative_g_score
-                f_score[neighbor] = g_score[neighbor] + grid_h(neighbor, wrld.exitcell)
+                f_score[neighbor] = g_score[neighbor] + manhattan_distance(neighbor, wrld.exitcell)
                 if neighbor not in visited:
                     heapq.heappush(frontier, (f_score[neighbor], neighbor))
                     visited.append(neighbor)
 
 
-def grid_h(node, goal):
+def manhattan_distance(node, goal):
     dx = abs(node[0] - goal[0])
     dy = abs(node[1] - goal[1])
     return dx + dy

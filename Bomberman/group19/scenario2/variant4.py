@@ -9,7 +9,7 @@ from game import Game
 from monsters.selfpreserving_monster import SelfPreservingMonster
 
 # TODO This is your code!
-sys.path.insert(1, '../groupNN')
+sys.path.insert(1, '../group19')
 from testcharacter import TestCharacter
 
 # Create the game
@@ -22,11 +22,7 @@ g.add_monster(SelfPreservingMonster("aggressive", # name
 ))
 
 # TODO Add your character
-from expectimaxcharacter import ExpectimaxCharacter
-g.add_character(ExpectimaxCharacter("me", # name
-                              "C",  # avatar
-                              0, 0  # position
-))
+g.add_character(ExpectimaxCharacter("me", "C", 0, 0, 25, 1, 2000, 1))
 
 # Run!
-g.go(1)
+g.go()
